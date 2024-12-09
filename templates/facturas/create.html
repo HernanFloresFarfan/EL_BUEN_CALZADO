@@ -4,6 +4,24 @@
 
 {% block content  %}
 
+<style>
+    h1 {
+        color: white;
+        text-shadow: 
+        -3px -3px 0 black, 
+        3px -3px 0 black, 
+        -3px 3px 0 black, 
+        3px 3px 0 black;
+    }
+
+    /* Estilo para los encabezados de los campos */
+    .form-label {
+        color: white !important; /* Cambiar el color de texto a blanco */
+        font-weight: bold; /* Ponerlos en negrilla */
+        text-shadow: 1px 1px 2px black; /* Resaltar con una sombra */
+    }
+</style>
+
 <h1>Registrar Factura</h1>
 
 <!-- Mostrar mensajes de flash -->
@@ -63,12 +81,12 @@
     </div>
 
     <div class="mb-3">
-        <label for="monto_ingreso" class="form-label">Monto Ingresado ($)</label>
+        <label for="monto_ingreso" class="form-label">Monto Ingresado (Bs)</label>
         <input type="number" class="form-control" name="monto_ingreso" id="monto_ingreso" min="0" step="0.01" required>
     </div>
 
     <div class="mb-3">
-        <label for="cambio" class="form-label">Cambio ($)</label>
+        <label for="cambio" class="form-label">Cambio (Bs)</label>
         <input type="text" class="form-control" id="cambio" readonly>
     </div>
 

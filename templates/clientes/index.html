@@ -4,6 +4,17 @@
 
 {% block content %}
 
+<style>
+    h1 {
+        color: white;
+        text-shadow: 
+        -3px -3px 0 black, 
+        3px -3px 0 black, 
+        -3px 3px 0 black, 
+        3px 3px 0 black;
+    }
+</style>
+
 <h1>Lista de clientes</h1>
 
 <a href="{{url_for('cliente.create')}}" class="btn btn-success mb-3">Nuevo</a>

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="es">
   <head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %} {% endblock %}</title>
@@ -8,15 +9,13 @@
     <style>
       /* Estilo personalizado para la barra de navegación */
       .custom-navbar {
-        background: linear-gradient(90deg, #FF5733, #FFC300, #28A745); /* Colores degradados */
+        background: linear-gradient(90deg, #4b0f02, #b35a08, #92021a); /* Colores degradados */
       }
       .custom-navbar .navbar-brand {
-        font-size: 2.5rem; /* Tamaño más grande para el título */
+        font-size: 3rem; /* Tamaño más grande para el título */
         color: #ffffff !important; /* Texto blanco */
       }
-      .custom-navbar .navbar-brand img {
-        border: 2px solid #ffffff; /* Borde blanco */
-      }
+      
       .custom-navbar .nav-link {
         font-size: 1.6rem; /* Tamaño más grande para los botones */
         color: #ffffff !important; /* Texto blanco */
@@ -27,20 +26,34 @@
 
       /* Fondo de la pantalla */
       body {
-        background: linear-gradient(to right, #f3cc84, #eff7dd); /* Degradado de azul claro a turquesa claro */
-        min-height: 100vh;  /* Asegura que el fondo cubra toda la pantalla */
+        background-image: url('{{ url_for("static", filename="img/fondot7.png") }}'); /* Ruta de tu imagen */
+        background-size: 100% 100%; /* Ajusta el tamaño para cubrir toda la pantalla */
+        background-repeat: no-repeat; /* Evita que la imagen se repita */
+        background-position: center; /* Centra la imagen */
+        flex-direction: column;
+        background-attachment: fixed; 
+        min-height: 100vh; /* Asegura que el fondo se extienda hasta el tamaño completo de la pantalla */
       }
+      /* Cambiar el estilo del título con una fuente moderna */
+    .navbar-brand {
+      font-family: 'Montserrat', sans-serif; /* Cambiamos la tipografía aquí */
+      font-size: 2.8rem;
+      color: white !important;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Agrega una sombra al texto */
+    }
     </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg custom-navbar">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
-          <img src="{{ url_for('static', filename='img/logo4.png') }}" alt="Logo" style="width: 100px; height: 100px; margin-right: 10px;">
-          El Buen Calzado
+          <img src="{{ url_for('static', filename='img/logo1.png') }}" alt="Logo" style="width: 100px; height: 100px; margin-right: 10px;">
+          EL BUEN CALZADO
         </a>
         <div class="ml-auto">
-          {% if request.endpoint in ['usuario.index', 'cliente.index', 'producto.index', 'venta.index', 'factura.index', 'compra.index'] %}
+          {% if request.endpoint in ['usuario.index', 'cliente.index', 'producto.index', 'venta.index', 'factura.index', 'compra.index',
+          'usuario.create', 'cliente.create', 'producto.create', 'venta.create', 'factura.create', 'compra.create',
+          'usuario.edit', 'cliente.edit', 'producto.edit', 'venta.edit', 'factura.edit', 'compra.edit'] %}
             <!-- Solo mostrar en las páginas de listas -->
             <a class="btn btn-primary me-2" href="{{ url_for('home') }}">Menú</a>
             <a class="btn btn-danger" href="{{ url_for('auth.logout') }}">Cerrar sesión</a>

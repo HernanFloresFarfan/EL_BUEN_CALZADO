@@ -13,6 +13,7 @@ def login():
         if usuario and usuario.verify_password(contraseña):
             session['user_id'] = usuario.id
             session['rol'] = usuario.rol
+            session['usuario_nombre'] = usuario.nombre
             #if usuario.rol == 'empleado':
             #    return redirect(url_for('venta.index'))
             #else:

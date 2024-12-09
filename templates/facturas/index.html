@@ -4,6 +4,17 @@
 
 {% block content %}
 
+<style>
+    h1 {
+        color: white;
+        text-shadow: 
+        -3px -3px 0 black, 
+        3px -3px 0 black, 
+        -3px 3px 0 black, 
+        3px 3px 0 black;
+    }
+</style>
+
 <h1>Lista de Facturas</h1>
 
 <a href="{{url_for('factura.create')}}" class="btn btn-success mb-3">Nueva Factura</a>
