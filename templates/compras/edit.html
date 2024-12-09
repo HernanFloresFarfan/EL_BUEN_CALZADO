@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %} COMPRAS | EDIT {% endblock %}
+
+{% block content %}
+
+<h1>Actualización de Compra</h1>
+
+<form action="{{ url_for('compra.edit', id=compra.id) }}" method="POST">
+    <div class="mb-3">
+        <label for="producto_id" class="form-label">Producto</label>
+        <select name="producto_id" class="form-control" required>
+            {% for producto in productos %}
+            <option value="{{ producto.id }}" {% if producto.id == compra.producto_id %}selected{% endif %}>
+                {{ producto.nombre }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div class="mb-3">
+        <label for="cantidad" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" name="cantidad" value="{{ compra.cantidad }}" min="1" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="precio_compra" class="form-label">Precio de Compra</label>
+        <input type="number" step="0.01" class="form-control" name="precio_compra" value="{{ compra.precio_compra }}" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="fecha" class="form-label">Fecha</label>
+        <input type="date" class="form-control" name="fecha" value="{{ compra.fecha }}" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="proveedor" class="form-label">Proveedor</label>
+        <input type="text" class="form-control" name="proveedor" value="{{ compra.proveedor }}" required>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Actualizar Compra</button>
+</form>
+
+{% endblock %}

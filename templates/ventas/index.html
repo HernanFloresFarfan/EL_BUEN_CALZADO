@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %} VENTAS {% endblock %}
+
+{% block content %}
+
+<h1>Lista de Ventas</h1>
+
+<a href="{{ url_for('venta.create') }}" class="btn btn-success mb-3">Nueva Venta</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+            <th>Fecha</th>
+            <th>Empleado</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in ventas %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.cliente.nombre }}</td>
+            <td>{{ item.producto.descripcion }}</td>
+            <td>{{ item.cantidad }}</td>
+            <td>{{ item.total }}</td>
+            <td>{{ item.fecha.strftime('%d/%m/%Y') }}</td>
+            <td>{{ item.empleado.username }}</td>
+            <td>
+                <a href="{{ url_for('venta.edit', id=item.id) }}" class="btn btn-warning">Editar</a>
+            </td>
+            <td>
+                <a href="{{ url_for('venta.delete', id=item.id) }}" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

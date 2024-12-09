@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %} VENTAS | EDITAR {% endblock %}
+
+{% block content %}
+
+<h1>Actualización de Venta</h1>
+
+<form action="{{ url_for('venta.edit', id=venta.id) }}" method="POST">
+    <div class="mb-3">
+        <label for="" class="form-label">Cliente</label>
+        <select name="cliente_id" class="form-control" required>
+            <option value="">Seleccione un cliente</option>
+            {% for cliente in clientes %}
+                <option value="{{ cliente.id }}" {% if cliente.id == venta.cliente_id %} selected {% endif %}>
+                    {{ cliente.nombre }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label">Producto</label>
+        <select name="producto_id" class="form-control" required>
+            <option value="">Seleccione un producto</option>
+            {% for producto in productos %}
+                <option value="{{ producto.id }}" {% if producto.id == venta.producto_id %} selected {% endif %}>
+                    {{ producto.descripcion }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" name="cantidad" value="{{ venta.cantidad }}" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label">Fecha</label>
+        <input type="date" class="form-control" name="fecha" value="{{ venta.fecha.strftime('%Y-%m-%d') }}" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label">Empleado</label>
+        <select name="empleado_id" class="form-control" required>
+            <option value="">Seleccione un empleado</option>
+            {% for empleado in empleados %}
+                <option value="{{ empleado.id }}" {% if empleado.id == venta.empleado_id %} selected {% endif %}>
+                    {{ empleado.username }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label">Total</label>
+        <input type="number" class="form-control" name="total" value="{{ venta.total }}" readonly>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar Venta</button>
+</form>
+
+{% endblock %}

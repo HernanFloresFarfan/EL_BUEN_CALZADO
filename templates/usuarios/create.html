@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} USUARIO | CREATE {% endblock %}
+
+{% block content  %}
+
+<h1>Registro de usuario</h1>
+
+<form action="{{ url_for('usuario.create') }}" method="post">
+    <div class="mb-3">
+        <label for=""  class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" required>
+    </div>
+    <div class="mb-3">
+        <label for=""  class="form-label">Usuario</label>
+        <input type="text" class="form-control" name="username" required>
+    </div>
+    <div class="mb-3">
+        <label for=""  class="form-label">Password</label>
+        <input type="password" class="form-control" name="password" required>
+    </div>
+    <div class="mb-3">
+        <label for=""  class="form-label">Rol</label>
+         <select name="rol" class="form-select" required>
+            <option value="admin">Admin</option>
+            <option value="cajero">Cajero</option>
+         </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrtar usuario</button>
+</form>
+
+{% endblock %}

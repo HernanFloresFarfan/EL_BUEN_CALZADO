@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} CLIENTES | EDIT {% endblock %}
+
+{% block content  %}
+
+<h1>Actualizacion de cliente</h1>
+
+<form action="{{ url_for('cliente.edit',id=cliente.id) }}" method="POST">
+    <div class="mb-3">
+        <label for=""  class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" value="{{cliente.nombre}}" required>
+    </div>
+    <div class="mb-3">
+        <label for=""  class="form-label">Correo Electronico</label>
+        <input type="email" class="form-control" name="email" value="{{cliente.email}}" required>
+    </div>
+    <div class="mb-3">
+        <label for=""  class="form-label">Telefono</label>
+        <input type="number" class="form-control" name="telefono" value="{{cliente.telefono}}" required>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Actualizar cliente</button>
+</form>
+
+{% endblock %}

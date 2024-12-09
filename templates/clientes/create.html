@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} CLIENTES | CREATE {% endblock %}
+
+{% block content  %}
+
+<h1>Registro de cliente</h1>
+
+<form action="{{ url_for('cliente.create') }}" method="post">
+    <div class="mb-3">
+        <label for=""  class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" required>
+    </div>
+    <div class="mb-3">
+        <label for=""  class="form-label">Correo Electronico</label>
+        <input type="email" class="form-control" name="email" required>
+    </div>
+    <div class="mb-3">
+        <label for=""  class="form-label">Telefono</label>
+        <input type="number" class="form-control" name="telefono" required>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Registrtar cliente</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %} PRODUCTOS | EDIT {% endblock %}
+
+{% block content  %}
+
+<h1>Actualizacion de producto</h1>
+
+<form action="{{ url_for('producto.create',id=producto.id) }}" method="POST">
+    <!-- Campo para Nombre -->
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" value="{{ producto.nombre }}" required>
+    </div>
+    <!-- Campo para Descripción -->
+    <div class="mb-3">
+        <label for=""  class="form-label">Descripcion</label>
+        <input type="text" class="form-control" name="descripcion" value="{{producto.descripcion}}" required>
+    </div>
+    <!-- Campo para Precio -->
+    <div class="mb-3">
+        <label for=""  class="form-label">Precio</label>
+        <input type="number" class="form-control" name="precio" min="0" step="0.01" value="{{producto.precio}}" required>
+    </div>
+    <!-- Campo para Stock -->
+    <div class="mb-3">
+        <label for=""  class="form-label">Cantidad</label>
+        <input type="number" class="form-control" name="stock" value="{{producto.stock}}" required>
+    </div>
+    <!-- Campo para Imagen -->
+    <div class="mb-3">
+        <label for="imagen" class="form-label">Imagen del producto</label>
+        {% if producto.imagen %}
+            <p>Imagen actual:</p>
+            <img src="{{ url_for('static', filename=producto.imagen) }}" alt="Imagen del producto" style="width: 100px; height: auto;">
+        {% endif %}
+        <input type="file" class="form-control" name="imagen" accept="image/*">
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Actualizar producto</button>
+</form>
+
+{% endblock %}
