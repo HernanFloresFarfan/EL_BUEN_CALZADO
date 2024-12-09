@@ -11,14 +11,14 @@
         background: linear-gradient(90deg, #FF5733, #FFC300, #28A745); /* Colores degradados */
       }
       .custom-navbar .navbar-brand {
-        font-size: 3rem; /* Tamaño más grande para el título */
+        font-size: 2.5rem; /* Tamaño más grande para el título */
         color: #ffffff !important; /* Texto blanco */
       }
       .custom-navbar .navbar-brand img {
         border: 2px solid #ffffff; /* Borde blanco */
       }
       .custom-navbar .nav-link {
-        font-size: 1.8rem; /* Tamaño más grande para los botones */
+        font-size: 1.6rem; /* Tamaño más grande para los botones */
         color: #ffffff !important; /* Texto blanco */
       }
       .custom-navbar .nav-link:hover {
@@ -30,20 +30,22 @@
         background: linear-gradient(to right, #f3cc84, #eff7dd); /* Degradado de azul claro a turquesa claro */
         min-height: 100vh;  /* Asegura que el fondo cubra toda la pantalla */
       }
-
-
     </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg custom-navbar">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <img src="{{ url_for('static', filename='img/logo4.png') }}" alt="Logo" style="width: 100px; height: 100px; margin-right: 10px;">
-            EL BUEN CALZADO</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="{{ url_for('static', filename='img/logo4.png') }}" alt="Logo" style="width: 100px; height: 100px; margin-right: 10px;">
+          El Buen Calzado
+        </a>
+        <div class="ml-auto">
+          {% if request.endpoint in ['usuario.index', 'cliente.index', 'producto.index', 'venta.index', 'factura.index', 'compra.index'] %}
+            <!-- Solo mostrar en las páginas de listas -->
+            <a class="btn btn-primary me-2" href="{{ url_for('home') }}">Menú</a>
+            <a class="btn btn-danger" href="{{ url_for('auth.logout') }}">Cerrar sesión</a>
+          {% else %}
+            <!-- Mostrar navegación completa en otras páginas -->
             <ul class="navbar-nav">
               {% if 'rol' in session %}
                 {% if session['rol'] == 'admin' %}
@@ -77,13 +79,16 @@
                 </li>
               {% endif %}
             </ul>
-          </div>
+          {% endif %}
         </div>
-      </nav>
+      </div>
+    </nav>
+
     <div class="container">
         {% block content %}
         {% endblock %}
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>

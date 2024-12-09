@@ -13,10 +13,13 @@ def login():
         if usuario and usuario.verify_password(contraseña):
             session['user_id'] = usuario.id
             session['rol'] = usuario.rol
-            if usuario.rol == 'empleado':
-                return redirect(url_for('venta.index'))
-            else:
-                return redirect(url_for('usuario.index'))
+            #if usuario.rol == 'empleado':
+            #    return redirect(url_for('venta.index'))
+            #else:
+            #    return redirect(url_for('usuario.index'))
+            
+            # Redirigir siempre al menú principal
+            return redirect(url_for('home'))
         
         flash('Credenciales incorrectas', 'error')
     return render_template('login.html')

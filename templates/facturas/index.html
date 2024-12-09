@@ -14,8 +14,13 @@
         <th>Cliente</th>
         <th>Producto</th>
         <th>Cantidad</th>
+        <th>Subtotal</th>
+        <th>Descuento</th>
         <th>Total</th>
+        <th>Monto Ingresado</th>
+        <th>Cambio</th>
         <th>Fecha</th>
+        <th>Imprimir</th>
         <th></th>
         <th></th>
     </tr>
@@ -25,8 +30,15 @@
         <td>{{item.cliente.nombre}}</td>
         <td>{{item.producto.nombre}}</td>
         <td>{{item.cantidad}}</td>
+        <td>${{item.subtotal}}</td>
+        <td>${{item.descuento}}</td>
         <td>${{item.total}}</td>
+        <td>${{item.monto_ingreso}}</td>
+        <td>${{item.cambio}}</td>
         <td>{{item.fecha}}</td>
+        <td>
+            <a href="{{ url_for('factura.print_factura', id=item.id) }}" class="btn btn-info" target="_blank">Imprimir</a>
+        </td>
         <td>
             <a href="{{url_for('factura.edit', id=item.id)}}" class="btn btn-warning">Editar</a>
         </td>

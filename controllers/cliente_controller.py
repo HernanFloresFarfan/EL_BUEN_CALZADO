@@ -17,10 +17,11 @@ def index():
 def create():
     if request.method == 'POST':
         nombre =  request.form['nombre']
+        ci_nit = request.form['ci_nit']  # Nuevo atributo
         email =  request.form['email']
         telefono =  request.form['telefono']
         
-        cliente =  Cliente(nombre,email,telefono)
+        cliente =  Cliente(nombre, ci_nit, email,telefono)
         cliente.save()
         return redirect(url_for('cliente.index'))
         
@@ -31,11 +32,12 @@ def edit(id):
     cliente = Cliente.get_by_id(id)
     if request.method == 'POST':
         nombre =  request.form['nombre']
+        ci_nit = request.form['ci_nit']  # Nuevo atributo
         email =  request.form['email']
         telefono =  request.form['telefono']
         
         #Actualizar
-        cliente.update(nombre=nombre,email=email,telefono=telefono)
+        cliente.update(nombre=nombre, ci_nit=ci_nit,email=email,telefono=telefono)
         return redirect(url_for('cliente.index'))
         
     return cliente_view.edit(cliente)

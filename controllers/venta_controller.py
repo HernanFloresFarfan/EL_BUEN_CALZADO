@@ -12,6 +12,9 @@ venta_bp = Blueprint('venta', __name__, url_prefix="/ventas")
 def index():
     """Recupera todos los registros de ventas."""
     ventas = Venta.get_all()
+    # Usa el método aquí para enviar los datos formateados a la vista
+    #detalles_ventas = [venta.obtener_detalles_venta() for venta in ventas]
+    #return venta_view.list(detalles_ventas)
     return venta_view.list(ventas)
 
 @venta_bp.route("/create", methods=['GET', 'POST'])
@@ -106,16 +109,23 @@ def edit(id):
 
     clientes = Cliente.query.all()
     productos = Producto.query.all()
-    return venta_view.edit(venta, clientes, productos)
+    empleados = Usuario.query.all()
+    return venta_view.edit(venta, clientes, productos, empleados)
 
 @venta_bp.route("/delete/<int:id>")
 def delete(id):
-    """Elimina un registro de venta."""
+    """Elimina un registro de venta con validación para evitar borrar si tiene facturas asociadas."""
     venta = Venta.get_by_id(id)
     if not venta:
         flash("Venta no encontrada.", "error")
         return redirect(url_for('venta.index'))
 
+    # Validar si la venta tiene facturas asociadas antes de eliminarla
+    if venta.facturas:
+        flash("No se puede eliminar la venta porque tiene facturas asociadas.", "error")
+        return redirect(url_for('venta.index'))
+
+    # Si la validación pasa, proceder con la eliminación
     producto = Producto.get_by_id(venta.producto_id)
     if producto:
         producto.update(stock=producto.stock + venta.cantidad)

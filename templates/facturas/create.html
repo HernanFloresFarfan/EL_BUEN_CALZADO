@@ -6,9 +6,20 @@
 
 <h1>Registrar Factura</h1>
 
+<!-- Mostrar mensajes de flash -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul>
+        {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
 <form action="{{ url_for('factura.create') }}" method="POST">
     <div class="mb-3">
-        <label for=""  class="form-label">Cliente</label>
+        <label for="cliente_id" class="form-label">Cliente</label>
         <select class="form-control" name="cliente_id" required>
             <option value="" disabled selected>Selecciona un cliente</option>
             {% for cliente in clientes %}
@@ -18,8 +29,8 @@
     </div>
     
     <div class="mb-3">
-        <label for=""  class="form-label">Producto</label>
-        <select class="form-control" name="producto_id" required>
+        <label for="producto_id" class="form-label">Producto</label>
+        <select class="form-control" name="producto_id" id="producto_id" required>
             <option value="" disabled selected>Selecciona un producto</option>
             {% for producto in productos %}
                 <option value="{{ producto.id }}">{{ producto.nombre }}</option>
@@ -28,22 +39,41 @@
     </div>
 
     <div class="mb-3">
-        <label for=""  class="form-label">Venta</label>
-        <select class="form-control" name="venta_id" required>
+        <label for="venta_id" class="form-label">Venta</label>
+        <select class="form-control" name="venta_id" id="venta_id" required>
             <option value="" disabled selected>Selecciona una venta</option>
             {% for venta in ventas %}
-                <option value="{{ venta.id }}">{{ venta.id }}</option>  <!-- Puedes cambiar la información mostrada según tus necesidades -->
+                <option value="{{ venta.id }}">{{ venta.id }}</option>
             {% endfor %}
         </select>
     </div>
 
+    {% for producto in productos %}
     <div class="mb-3">
-        <label for=""  class="form-label">Cantidad</label>
-        <input type="number" class="form-control" name="cantidad" required min="1">
+        <label for="cantidad" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" name="cantidad" id="cantidad" required min="1" max="{{ producto.stock }}">
+        <small class="form-text text-muted">Cantidad vendida: {{ cantidad_vendida.get(producto.id, 0) }}</small>
+    </div>
+    {% endfor %}
+
+
+    <div class="mb-3">
+        <label for="descuento" class="form-label">Descuento (%)</label>
+        <input type="number" class="form-control" name="descuento" id="descuento" min="0" max="100" value="0">
     </div>
 
     <div class="mb-3">
-        <label for=""  class="form-label">Fecha</label>
+        <label for="monto_ingreso" class="form-label">Monto Ingresado ($)</label>
+        <input type="number" class="form-control" name="monto_ingreso" id="monto_ingreso" min="0" step="0.01" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="cambio" class="form-label">Cambio ($)</label>
+        <input type="text" class="form-control" id="cambio" readonly>
+    </div>
+
+    <div class="mb-3">
+        <label for="fecha" class="form-label">Fecha</label>
         <input type="date" class="form-control" name="fecha" required>
     </div>
 
@@ -51,4 +81,3 @@
 </form>
 
 {% endblock %}
-

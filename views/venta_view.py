@@ -6,7 +6,7 @@ def list(ventas):
     Se muestra la información básica de cada venta, incluyendo cliente, producto y total.
     """
     return render_template('ventas/index.html' , ventas=ventas)
- 
+
 def create(clientes, productos, empleados):
     """
     Renderiza el formulario de creación de ventas.
