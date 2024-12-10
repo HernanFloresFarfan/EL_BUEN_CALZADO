@@ -4,6 +4,24 @@
 
 {% block content  %}
 
+<style>
+    h1 {
+        color: white;
+        text-shadow: 
+        -3px -3px 0 black, 
+        3px -3px 0 black, 
+        -3px 3px 0 black, 
+        3px 3px 0 black;
+    }
+
+    /* Estilo para los encabezados de los campos */
+    .form-label {
+        color: white !important; /* Cambiar el color de texto a blanco */
+        font-weight: bold; /* Ponerlos en negrilla */
+        text-shadow: 1px 1px 2px black; /* Resaltar con una sombra */
+    }
+</style>
+
 <h1>Registro de producto</h1>
 
 <form action="{{ url_for('producto.create') }}" method="post">
