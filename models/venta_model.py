@@ -54,5 +54,14 @@ class Venta(db.Model):
         db.session.commit()
         
     def delete(self):
+        """
+        Valida si la venta tiene una factura asociada.
+        Solo eliminará la venta si no tiene facturas asociadas.
+        """
+        if self.facturas:  # Si hay facturas asociadas
+            raise Exception("No se puede eliminar la venta porque tiene facturas asociadas.")
+        
         db.session.delete(self)
         db.session.commit()
+    
+    

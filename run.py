@@ -1,4 +1,4 @@
-from flask import Flask, request, session, redirect, url_for
+from flask import Flask, request, session, redirect, url_for, render_template
 
 from controllers import usuario_controller,cliente_controller,producto_controller,venta_controller
 
@@ -9,7 +9,6 @@ from controllers.usuario_controller import usuario_bp
 from controllers.compra_controller import compra_bp 
 
 from controllers.factura_controller import factura_bp
-
 
 from database import db
 
@@ -46,10 +45,14 @@ def home():
     if 'user_id' not in session:
         return redirect(url_for('auth.login'))
     # Redirige según el rol
-    if session.get('rol') == 'admin':
-        return redirect(url_for('usuario.index'))
-    return redirect(url_for('venta.index'))
-    #return "<h1>Aplicacion Calzados</h1>"
+    #if session.get('rol') == 'admin':
+    #    return redirect(url_for('usuario.index'))
+    #return redirect(url_for('venta.index'))
+    
+    # Renderiza la página principal con botones personalizados según el rol
+    return render_template("menu.html")
+    
+    #return "<h1>Aplicacion Ferreteria</h1>"
 
 if __name__=="__main__":
     with app.app_context():

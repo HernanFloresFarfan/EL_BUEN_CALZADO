@@ -9,6 +9,7 @@ class Cliente(db.Model):
     
     id = db.Column(db.Integer,primary_key=True)
     nombre = db.Column(db.String(80),nullable=False)
+    ci_nit = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(100),nullable=False)
     telefono = db.Column(db.String(20),nullable=False)
     
@@ -18,8 +19,9 @@ class Cliente(db.Model):
 
     
     
-    def __init__(self, nombre,email,telefono):
+    def __init__(self, nombre, ci_nit, email,telefono):
         self.nombre = nombre
+        self.ci_nit = ci_nit
         self.email = email
         self.telefono = telefono 
         
@@ -35,12 +37,15 @@ class Cliente(db.Model):
     def get_by_id(id):
         return Cliente.query.get(id)
     
-    def update(self,nombre=None,email=None,telefono=None):
-        if nombre and  email and telefono:
-            self.nombre =  nombre
-            self.ememail = email
-            self.telefono =  telefono
-            
+    def update(self, nombre=None, ci_nit=None, email=None, telefono=None):
+        if nombre:
+            self.nombre = nombre
+        if ci_nit:
+            self.ci_nit = ci_nit
+        if email:
+            self.email = email
+        if telefono:
+            self.telefono = telefono
         db.session.commit()
         
     def delete(self):

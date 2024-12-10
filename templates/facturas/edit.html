@@ -6,47 +6,90 @@
 
 <h1>Actualizar Factura</h1>
 
-<form action="{{ url_for('factura.edit',id=factura.id) }}" method="POST">
+<form action="{{ url_for('factura.edit', id=factura.id) }}" method="POST">
+    
+    <!-- Selección de Cliente -->
     <div class="mb-3">
-        <label for=""  class="form-label">Cliente</label>
+        <label for="" class="form-label">Cliente</label>
         <select class="form-control" name="cliente_id" required>
             <option value="" disabled>Selecciona un cliente</option>
             {% for cliente in clientes %}
-                <option value="{{ cliente.id }}" {% if cliente.id == factura.cliente_id %}selected{% endif %}>{{ cliente.nombre }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="mb-3">
-        <label for=""  class="form-label">Producto</label>
-        <select class="form-control" name="producto_id" required>
-            <option value="" disabled>Selecciona un producto</option>
-            {% for producto in productos %}
-                <option value="{{ producto.id }}" {% if producto.id == factura.producto_id %}selected{% endif %}>{{ producto.nombre }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="mb-3">
-        <label for=""  class="form-label">Cantidad</label>
-        <input type="number" class="form-control" name="cantidad" value="{{factura.cantidad}}" required min="1">
-    </div>
-    <div class="mb-3">
-        <label for=""  class="form-label">Fecha</label>
-        <input type="date" class="form-control" name="fecha" value="{{ factura.fecha }}" required>
-    </div>
-
-    <!-- Campo de selección para venta_id -->
-    <div class="mb-3">
-        <label for="venta_id" class="form-label">Venta</label>
-        <select class="form-control" name="venta_id" id="venta_id" required>
-            <option value="" disabled>Selecciona una venta</option>
-            {% for venta in ventas %}
-                <option value="{{ venta.id }}" {% if venta.id == factura.venta_id %}selected{% endif %}>
-                    {{ venta.id }} - {{ venta.descripcion }} <!-- Asumiendo que tienes una descripción de la venta -->
+                <option value="{{ cliente.id }}" {% if cliente.id == factura.cliente_id %}selected{% endif %}>
+                    {{ cliente.nombre }}
                 </option>
             {% endfor %}
         </select>
     </div>
-    
+
+    <!-- Selección de Producto -->
+    <div class="mb-3">
+        <label for="" class="form-label">Producto</label>
+        <select class="form-control" name="producto_id" required>
+            <option value="" disabled>Selecciona un producto</option>
+            {% for producto in productos %}
+                <option value="{{ producto.id }}" {% if producto.id == factura.producto_id %}selected{% endif %}>
+                    {{ producto.nombre }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Campo Cantidad -->
+    <div class="mb-3">
+        <label for="" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" name="cantidad" value="{{ factura.cantidad }}" required min="1">
+    </div>
+
+    <!-- Campo Fecha -->
+    <div class="mb-3">
+        <label for="" class="form-label">Fecha</label>
+        <input type="date" class="form-control" name="fecha" value="{{ factura.fecha }}" required>
+    </div>
+
+    <!-- Selección de Venta -->
+    <div class="mb-3">
+        <label for="venta_id" class="form-label">Venta</label>
+        <select class="form-control" name="venta_id" required>
+            <option value="" disabled>Selecciona una venta</option>
+            {% for venta in ventas %}
+                <option value="{{ venta.id }}" {% if venta.id == factura.venta_id %}selected{% endif %}>
+                    {{ venta.id }} - {{ venta.descripcion }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Campo Subtotal -->
+    <div class="mb-3">
+        <label for="" class="form-label">Subtotal</label>
+        <input type="number" step="0.01" class="form-control" name="subtotal" value="{{ factura.subtotal }}" required>
+    </div>
+
+    <!-- Campo Descuento -->
+    <div class="mb-3">
+        <label for="" class="form-label">Descuento</label>
+        <input type="number" step="0.01" class="form-control" name="descuento" value="{{ factura.descuento }}" required>
+    </div>
+
+    <!-- Campo Total -->
+    <div class="mb-3">
+        <label for="" class="form-label">Total</label>
+        <input type="number" step="0.01" class="form-control" name="total" value="{{ factura.total }}" required>
+    </div>
+
+    <!-- Campo Monto Ingresado -->
+    <div class="mb-3">
+        <label for="" class="form-label">Monto Ingresado</label>
+        <input type="number" step="0.01" class="form-control" name="monto_ingreso" value="{{ factura.monto_ingreso }}" required>
+    </div>
+
+    <!-- Campo Cambio -->
+    <div class="mb-3">
+        <label for="" class="form-label">Cambio</label>
+        <input type="number" step="0.01" class="form-control" name="cambio" value="{{ factura.cambio }}" required>
+    </div>
+
+    <!-- Botón para enviar los cambios -->
     <button type="submit" class="btn btn-primary">Actualizar Factura</button>
 </form>
 
