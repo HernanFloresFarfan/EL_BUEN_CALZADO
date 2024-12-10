@@ -3,6 +3,7 @@ from datetime import datetime
 from models.venta_model import Venta
 from models.producto_model import Producto
 from models.cliente_model import Cliente
+from models.usuario_model import Usuario 
 from views import venta_view
 
 venta_bp = Blueprint('venta', __name__, url_prefix="/ventas")
@@ -61,7 +62,8 @@ def create():
 
     clientes = Cliente.query.all()
     productos = Producto.query.all()
-    return venta_view.create(clientes, productos)
+    empleados = Usuario.query.all()  # Agregar esto para obtener empleados
+    return venta_view.create(clientes, productos, empleados)
 
 @venta_bp.route("/edit/<int:id>", methods=['GET', 'POST'])
 def edit(id):

@@ -1,22 +1,10 @@
 import os
 from flask import request, redirect, url_for, Blueprint, flash
-from werkzeug.utils import secure_filename
 from models.producto_model import Producto
 from views import producto_view
 
 # Configuración del Blueprint
 producto_bp = Blueprint('producto', __name__, url_prefix="/productos")
-
-# Directorio donde se guardarán las imágenes
-UPLOAD_FOLDER = 'static/uploads/productos'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-
-# Crear el directorio de subida si no existe
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
-def allowed_file(filename):
-    """Valida si un archivo tiene una extensión permitida."""
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @producto_bp.route("/")
 def index():
@@ -34,19 +22,8 @@ def create():
         precio = float(request.form['precio'])
         stock = int(request.form['stock'])
 
-        # Procesar la imagen subida
-        imagen = request.files.get('imagen')
-        #imagen_filename = 'no_disponible.png'  # Imagen predeterminada
-        
-        if imagen and allowed_file(imagen.filename):
-            # Guardar la imagen con un nombre seguro
-            imagen_filename = secure_filename(imagen.filename)
-            imagen.save(os.path.join(UPLOAD_FOLDER, imagen_filename))
-        else:
-            imagen_filename = 'no_disponible.png'  # Imagen predeterminada si no se sube una imagen
-        
         # Crear un nuevo producto
-        producto = Producto(nombre, descripcion, precio, stock, imagen_filename)
+        producto = Producto(nombre, descripcion, precio, stock)
         producto.save()
         flash("Producto creado exitosamente.", "success")
         return redirect(url_for('producto.index'))
@@ -68,17 +45,8 @@ def edit(id):
         precio = float(request.form['precio'])
         stock = int(request.form['stock'])
 
-        # Procesar la imagen subida
-        imagen = request.files.get('imagen')
-        imagen_filename = producto.imagen  # Mantener la imagen actual si no se sube una nueva
-        
-        if imagen and allowed_file(imagen.filename):
-            imagen_filename = secure_filename(imagen.filename)
-            imagen.save(os.path.join(UPLOAD_FOLDER, imagen_filename))
-            
-        
         # Actualizar el producto
-        producto.update(nombre=nombre, descripcion=descripcion, precio=precio, stock=stock, imagen=imagen_filename)
+        producto.update(nombre=nombre, descripcion=descripcion, precio=precio, stock=stock)
         flash("Producto actualizado exitosamente.", "success")
         return redirect(url_for('producto.index'))
 

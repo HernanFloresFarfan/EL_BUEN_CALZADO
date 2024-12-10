@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} FACTURAS {% endblock %}
+
+{% block content %}
+
+<h1>Lista de Facturas</h1>
+
+<a href="{{url_for('factura.create')}}" class="btn btn-success mb-3">Nueva Factura</a>
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Total</th>
+        <th>Fecha</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for item in facturas %}
+    <tr>
+        <td>{{item.id}}</td>
+        <td>{{item.cliente.nombre}}</td>
+        <td>{{item.producto.nombre}}</td>
+        <td>{{item.cantidad}}</td>
+        <td>${{item.total}}</td>
+        <td>{{item.fecha}}</td>
+        <td>
+            <a href="{{url_for('factura.edit', id=item.id)}}" class="btn btn-warning">Editar</a>
+        </td>
+        <td>
+            <a href="{{ url_for('factura.delete', id=item.id) }}" class="btn btn-danger">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

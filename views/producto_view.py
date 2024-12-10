@@ -1,5 +1,9 @@
 from flask import render_template
 
+from controllers.decorators import role_required 
+
+
+
 def list(productos):
     return render_template('productos/index.html' , productos=productos)
  
