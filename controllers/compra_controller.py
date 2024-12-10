@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for, Blueprint, flash
+from flask import request, redirect, url_for, Blueprint, flash,render_template
 from datetime import datetime
 from models.producto_model import Producto
 from models.compra_model import Compra

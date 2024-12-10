@@ -16,7 +16,7 @@ class Venta(db.Model):
     cliente = db.relationship('Cliente', back_populates='ventas')
     producto = db.relationship('Producto', back_populates='ventas')
     empleado = db.relationship('Usuario', back_populates='ventas')  # Relación con usuarios
-    factura = db.relationship('Factura', back_populates='venta', uselist=False)  # Relación uno a uno con facturas
+    facturas = db.relationship('Factura', back_populates='venta')  # Relación uno a uno con facturas
     
     def __init__(self, cliente_id, producto_id, cantidad, total, fecha, empleado_id):
         self.cliente_id = cliente_id

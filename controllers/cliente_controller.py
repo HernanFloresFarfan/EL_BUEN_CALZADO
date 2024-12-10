@@ -1,11 +1,13 @@
 from flask import request,redirect,url_for,Blueprint
-
+from controllers.decorators import role_required
 from models.cliente_model import Cliente
 from views import cliente_view
+
 
 cliente_bp = Blueprint('cliente', __name__,url_prefix="/clientes")
 
 @cliente_bp.route("/")
+@role_required(['admin', 'empleado'])
 def index():
     #Recupera todos los registros de  clientes
     clientes = Cliente.get_all()

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %} FACTURAS | CREATE {% endblock %}
+
+{% block content  %}
+
+<h1>Registrar Factura</h1>
+
+<form action="{{ url_for('factura.create') }}" method="POST">
+    <div class="mb-3">
+        <label for=""  class="form-label">Cliente</label>
+        <select class="form-control" name="cliente_id" required>
+            <option value="" disabled selected>Selecciona un cliente</option>
+            {% for cliente in clientes %}
+                <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div class="mb-3">
+        <label for=""  class="form-label">Producto</label>
+        <select class="form-control" name="producto_id" required>
+            <option value="" disabled selected>Selecciona un producto</option>
+            {% for producto in productos %}
+                <option value="{{ producto.id }}">{{ producto.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for=""  class="form-label">Venta</label>
+        <select class="form-control" name="venta_id" required>
+            <option value="" disabled selected>Selecciona una venta</option>
+            {% for venta in ventas %}
+                <option value="{{ venta.id }}">{{ venta.id }}</option>  <!-- Puedes cambiar la información mostrada según tus necesidades -->
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for=""  class="form-label">Cantidad</label>
+        <input type="number" class="form-control" name="cantidad" required min="1">
+    </div>
+
+    <div class="mb-3">
+        <label for=""  class="form-label">Fecha</label>
+        <input type="date" class="form-control" name="fecha" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Registrar Factura</button>
+</form>
+
+{% endblock %}
+

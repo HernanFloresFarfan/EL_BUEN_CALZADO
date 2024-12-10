@@ -27,15 +27,6 @@
         <label for=""  class="form-label">Cantidad</label>
         <input type="number" class="form-control" name="stock" value="{{producto.stock}}" required>
     </div>
-    <!-- Campo para Imagen -->
-    <div class="mb-3">
-        <label for="imagen" class="form-label">Imagen del producto</label>
-        {% if producto.imagen %}
-            <p>Imagen actual:</p>
-            <img src="{{ url_for('static', filename=producto.imagen) }}" alt="Imagen del producto" style="width: 100px; height: auto;">
-        {% endif %}
-        <input type="file" class="form-control" name="imagen" accept="image/*">
-    </div>
     
     <button type="submit" class="btn btn-primary">Actualizar producto</button>
 </form>

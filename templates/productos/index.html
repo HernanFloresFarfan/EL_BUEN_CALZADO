@@ -15,7 +15,6 @@
         <th>Descripción</th>
         <th>Precio</th>
         <th>Stock</th>
-        <th>Imagen</th>
         <th>Acción</th>
         <th>Acción</th>
     </tr>
@@ -27,17 +26,10 @@
         <td>{{ item.precio | round(2) }}</td>
         <td>{{ item.stock }}</td>
         <td>
-            {% if item.imagen %}
-                <img src="{{ url_for('static', filename='uploads/productos/' + item.imagen) }}" alt="Imagen del producto" style="width: 100px; height: auto;">
-            {% else %}
-                No disponible
-            {% endif %}
+            <a href="{{url_for('producto.edit',id=item.id)}}" class="btn btn-warning">Editar</a>
         </td>
         <td>
-            <a href="{{url_for('producto.edit',id=item.id)}}" class="btn btn-warning" >Editar</a>
-        </td>
-        <td>
-            <a href="{{ url_for ('producto.delete',id=item.id) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</a>
+            <a href="{{ url_for('producto.delete',id=item.id) }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</a>
         </td>
     </tr>
     {% endfor %}
